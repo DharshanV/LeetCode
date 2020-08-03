@@ -27,8 +27,17 @@ public class SingleNumber {
 
         return getKeyByValue(myMap,1);
     }
+
+    public static int singleNumberBetter(int[] nums) {
+        int singleNumber = 0;
+        for(int num : nums){
+            singleNumber ^= num;    //bitwise OR operator (XOR)
+        }
+        return singleNumber;
+    }
+
     public static void main(String[] args) {
         int[] nums = {4,1,2,1,2};
-        System.out.println(singleNumber(nums));
+        System.out.println(singleNumberBetter(nums));
     }
 }

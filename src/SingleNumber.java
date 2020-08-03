@@ -40,4 +40,5 @@ public class SingleNumber {
         int[] nums = {4,1,2,1,2};
         System.out.println(singleNumberBetter(nums));
     }
+    
 }

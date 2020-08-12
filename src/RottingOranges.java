@@ -26,52 +26,29 @@ public class RottingOranges {
         return list;
     }
 
-    public static void north(Pair rottenPos, int[][] grid) {
-        if (grid[rottenPos.x][rottenPos.y - 1] != 0) {
-            grid[rottenPos.x][rottenPos.y - 1] = 2;
-        }
-    }
-
-    public static void south(Pair rottenPos, int[][] grid) {
-        if (grid[rottenPos.x][rottenPos.y + 1] != 0) {
-            grid[rottenPos.x][rottenPos.y + 1] = 2;
-        }
-    }
-
-    public static void west(Pair rottenPos, int[][] grid) {
-        if (grid[rottenPos.x - 1][rottenPos.y] != 0) {
-            grid[rottenPos.x - 1][rottenPos.y] = 2;
-        }
-    }
-
-    public static void east(Pair rottenPos, int[][] grid) {
-        if (grid[rottenPos.x + 1][rottenPos.y] != 0) {
-            grid[rottenPos.x + 1][rottenPos.y] = 2;
-        }
+    public static boolean inRange(int x, int y, int[][] grid) {
+        if ((x < 0) || (x >= grid.length))
+            return false;
+        if ((y < 0) || (y >= grid.length))
+            return false;
+        return true;
     }
 
     public static void makeRotten(Pair rottenPos, int[][] grid) {
-        int size = grid.length;
         int x = rottenPos.x;
         int y = rottenPos.y;
 
-        if (x - 1 < 0 && y - 1 < 0) {           //top left
-            east(rottenPos, grid);
-            south(rottenPos, grid);
-        } else if (x + 1 >= size && y - 1 < 0) {    //top right
-            west(rottenPos, grid);
-            south(rottenPos, grid);
-        } else if (x - 1 < 0 && y + 1 >= size) {    //bottom left
-            north(rottenPos, grid);
-            east(rottenPos, grid);
-        } else if (x + 1 >= size && y + 1 >= size) { //bottom left
-            north(rottenPos, grid);
-            west(rottenPos, grid);
-        } else {
-            north(rottenPos, grid);
-            south(rottenPos, grid);
-            west(rottenPos, grid);
-            east(rottenPos, grid);
+        if (inRange(x - 1, y, grid)) {
+            if (grid[x - 1][y] != 0) grid[x - 1][y] = 2;
+        }
+        if (inRange(x + 1, y, grid)) {
+            if (grid[x + 1][y] != 0) grid[x + 1][y] = 2;
+        }
+        if (inRange(x, y - 1, grid)) {
+            if (grid[x][y - 1] != 0) grid[x][y - 1] = 2;
+        }
+        if (inRange(x, y + 1, grid)) {
+            if (grid[x][y + 1] != 0) grid[x][y + 1] = 2;
         }
     }
 
